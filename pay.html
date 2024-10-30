@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - JFK Viagens</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="img/j.png" type="image/x-icon">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <h1 class="JFK"><strong>JFK VIAGENS</strong></h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa-solid fa-house"></i> Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#pacotes"><i class="fas fa-plane"></i> Pacotes</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="login.html"><i class="fas fa-user"></i> Entrar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-comment"></i> Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Seção de Pagamento -->
+    <section class="pay">
+        <h1 class="text-center mb-4">Informações de Pagamento</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form>
+                    <div class="form-group">
+                        <label for="data-viagem">Data da Viagem</label>
+                        <input type="date" class="form-control" id="data-viagem" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="forma-pagamento">Forma de Pagamento</label>
+                        <select class="form-control" id="forma-pagamento" onchange="exibirOpcaoPagamento()" required>
+                            <option value="credito">Cartão de Crédito</option>
+                            <option value="debito">Cartão de Débito</option>
+                            <option value="pix">PIX</option>
+                        </select>
+                    </div>
+                    <div class="card-info">
+                        <div class="form-group">
+                            <label for="card-number">Número do Cartão</label>
+                            <input type="text" class="form-control" id="card-number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-expiry">Validade (MM/AA)</label>
+                            <input type="text" class="form-control" id="card-expiry" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-cvc">CVC</label>
+                            <input type="text" class="form-control" id="card-cvc" required>
+                        </div>
+                    </div>
+                    <div class="pix-info">
+                        <img src="img/pix.png" alt="QR Code PIX">
+                    </div>
+                    <div class="form-group">
+                        <label for="pacote">Confirme o Pacote</label>
+                        <select class="form-control" id="pacote" onchange="atualizarValor()" required>
+                            <option value="1" data-img="img/pct1.jpg" data-valor="1999"><img src="img/pct1.jpg" alt="Pacote 1"> Pacote 1</option>
+                            <option value="2" data-img="img/pct2.jpg" data-valor="2999"><img src="img/pct2.jpg" alt="Pacote 2"> Pacote 2</option>
+                            <option value="3" data-img="img/pct3.jpg" data-valor="3999"><img src="img/pct3.jpg" alt="Pacote 3"> Pacote 3</option>
+                            <option value="4" data-img="img/pct4.jpg" data-valor="4999"><img src="img/pct4.jpg" alt="Pacote 4"> Pacote 4</option>
+                            <option value="5" data-img="img/pct5.jpg" data-valor="5999"><img src="img/pct5.jpg" alt="Pacote 5"> Pacote 5</option>
+                            <option value="6" data-img="img/pct6.jpg" data-valor="6999"><img src="img/pct6.jpg" alt="Pacote 6"> Pacote 6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <img id="pacote-img" src="img/pct1.jpg" class="pacote-img" alt="Imagem do Pacote">
+                    </div>
+                    <div class="form-group valor-pacote">
+                        <span id="valor" class="valor-texto">R$ 1.000,00</span>
+                    </div>
+                    <button type="button" class="btn btn-success btn-block" onclick="finalizarCompra()">Finalização da Compra</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 JFK Pacotes Turísticos</p>
+    </footer>
+    <!-- Adicionando jQuery e Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.amazonaws.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
+   <script>
+    function atualizarValor() {
+    const pacote = document.getElementById('pacote').value;
+    const selectedOption = document.querySelector(`#pacote option[value="${pacote}"]`);
+    const valor = selectedOption.getAttribute('data-valor');
+    const imagem = selectedOption.getAttribute('data-img');
+
+    document.getElementById('valor').innerText = `R$ ${Number(valor).toLocaleString('pt-BR')},90`;
+    document.getElementById('pacote-img').src = imagem;
+}
+
+
+
+    function exibirOpcaoPagamento() {
+        const formaPagamento = document.getElementById('forma-pagamento').value;
+        document.querySelector('.card-info').style.display = 'none';
+        document.querySelector('.pix-info').style.display = 'none';
+
+        if (formaPagamento === 'credito' || formaPagamento === 'debito') {
+            document.querySelector('.card-info').style.display = 'block';
+        } else if (formaPagamento === 'pix') {
+            document.querySelector('.pix-info').style.display = 'block';
+        }
+    }
+
+    function finalizarCompra() {
+        const pacoteImgSrc = document.getElementById('pacote-img').src;
+        const url = `confirmacao.html?pacoteImg=${encodeURIComponent(pacoteImgSrc)}`;
+        window.location.href = url;
+    }
+
+    // Inicializar o valor e a imagem com base no pacote selecionado por padrão
+    document.addEventListener('DOMContentLoaded', (event) => {
+        atualizarValor();
+        exibirOpcaoPagamento();
+    });
+    </script>
+</body>
+</html>

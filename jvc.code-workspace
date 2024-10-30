@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../jvc"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"A01E01.C": "cpp"
+		}
+	}
+}

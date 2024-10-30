@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação - JFK Viagens</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="img/j.png" type="image/x-icon">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <h1 class="JFK"><strong>JFK VIAGENS</strong></h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa-solid fa-house"></i> Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#pacotes"><i class="fas fa-plane"></i> Pacotes</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="login.html"><i class="fas fa-user"></i> Entrar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-comment"></i> Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Seção de Confirmação -->
+    <section class="confirmation">
+        <h1 class="text-center mb-4">Obrigado por comprar com a JFK!</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <p>Este lindo lugar te aguarda! <span id="data-viagem"></span></p>
+                <img id="pacote-img" class="pacote-img" alt="Imagem do Pacote">
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 JFK Viagens</p>
+    </footer>
+    <!-- Adicionando jQuery e Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.amazonaws.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+    function getParameterByName(name) {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name);
+    }
+
+    // Recuperar os dados da URL
+    const dataViagem = getParameterByName('dataViagem');
+    const pacoteImg = getParameterByName('pacoteImg');
+
+    // Exibir os dados na página
+    document.getElementById('data-viagem').innerText = dataViagem;
+    document.getElementById('pacote-img').src = pacoteImg;
+    </script>
+</body>
+</html>
